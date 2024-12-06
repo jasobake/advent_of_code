@@ -9,7 +9,7 @@
 #include <unordered_map>
 
 int main() {
-    std::ifstream input_file("day1_input.txt");
+    std::ifstream input_file("data/advent_day1.txt");
 
     if (!input_file) {
         std::cerr << "Error opening file" << std::endl;

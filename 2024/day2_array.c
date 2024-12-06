@@ -4,7 +4,7 @@
 #include <math.h>
 #include <string.h>
 
-bool check_safety(const int* d, const size_t arrsize) {
+bool check_safety(const int *d, const size_t arrsize) {
     bool rising = (d[0] < d[1]);
 
     for (size_t i = 1; i < arrsize; ++i) {
@@ -27,7 +27,7 @@ int main() {
     FILE* file = fopen("data/advent_day2.txt", "r");
 
     while(fgets(line, sizeof(line), file)) {
-        char* token = strtok(line, " ");
+        char *token = strtok(line, " ");
         int holder[50];
         size_t counter = 0;
         while (token != NULL) {

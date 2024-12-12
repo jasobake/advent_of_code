@@ -73,9 +73,7 @@ bool check_safety(Node *head, bool allow_one_skip) {
             }
             skipped_one = true;
         }
-
         current = current->next;
-        
     }
 
     return true;
@@ -106,14 +104,12 @@ int main() {
             }
             token = strtok(NULL, " ");
         }
-        ++counter;
+        counter++;
         if (check_safety(head, false)) {
-            ++safe_count_part1;
+            safe_count_part1++;
         } else if (check_safety(head, true)) {
-            ++safe_count_part2;
+            safe_count_part2++;
         }
-        
-
         free_list(head);
     }
 

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include "data/day9.h" // char data[] = "31928309190908...."
 
 #define DEBUG false
@@ -60,6 +61,7 @@ int main() {
 
     // get input length so we can allocate an array
     size_t d_len = strlen(data);
+    uint8_t test = 0;
     size_t s = 0;
     size_t t = 0;
     Page *p = malloc(d_len * sizeof(Page));

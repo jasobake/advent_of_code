@@ -2,16 +2,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
-
 #include "data/day9.h"
 
 #define BUFF 1000000
 #define DEBUG false
 
-//char data[] = "2333133121414131402";
-
 void print(uint16_t buffer[], size_t size) {
-    if (DEBUG == false) return;
+    if (!DEBUG) return;
     for (size_t i = 0; i < size; i++) {
         printf("%d", buffer[i]);
     }
@@ -25,9 +22,8 @@ int main() {
         return 1;
     }
 
-    size_t counter = 0;
-    size_t pagesize = 0;
-    size_t file_id = 0;
+    // load pages
+    size_t counter = 0, pagesize = 0, file_id = 0;
     uint16_t value = 0;
     for (size_t i = 0; data[i] != '\0'; i++) {
         pagesize = data[i] - '0';
@@ -38,6 +34,7 @@ int main() {
         }
     }
 
+    // defrag
     size_t temp = 0, left = data[0] - '0', right = counter;
     while (true) {
         while(buffer[left] != 0) left++;
@@ -49,6 +46,7 @@ int main() {
         buffer[right] = temp;
     }
 
+    // get the sum
     uint64_t result = 0;
     for (size_t i = 0; i < left; i++) {
         result += buffer[i] * i;

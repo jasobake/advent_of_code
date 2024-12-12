@@ -38,7 +38,6 @@ int main() {
             break;
         } else {
             digits_left[i-4] = data[i];
-
         }
     }
 
@@ -66,7 +65,7 @@ int main() {
     
     data++;
   }
-  
+
   printf("Part 1: %zu\n", result);
   printf("Part 2: %zu\n", result2);
   return 0;

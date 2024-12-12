@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 void read_input(char dest[][140]) {
     char line[142];
@@ -18,48 +19,48 @@ void read_input(char dest[][140]) {
 }
 
 int main() {
-    char d[140][140] = {0};
-    read_input(d);
+    char puzzle[140][140] = {0};
+    read_input(puzzle);
 
     size_t result = 0;
     size_t result2 = 0;
 
-    #define AMIN 3
-    #define AMAX 136
+    #define MIN 3
+    #define MAX 136
 
     for (size_t i = 0; i < 140; ++i) {
         for(size_t n = 0; n < 140; ++n) {
-            if (d[i][n] == 'X') {
+            if (puzzle[i][n] == 'X') {
                 //horiz
-                if (n <= AMAX && d[i][n+1] == 'M' && d[i][n+2] == 'A' && d[i][n+3] == 'S') ++result;
-                if (n >= AMIN && d[i][n-1] == 'M' && d[i][n-2] == 'A' && d[i][n-3] == 'S') ++result;
+                if (n <= MAX && puzzle[i][n+1] == 'M' && puzzle[i][n+2] == 'A' && puzzle[i][n+3] == 'S') result++;
+                if (n >= MIN && puzzle[i][n-1] == 'M' && puzzle[i][n-2] == 'A' && puzzle[i][n-3] == 'S') result++;
 
                 //vertical
-                if (i <= AMAX && d[i+1][n] == 'M' && d[i+2][n] == 'A' && d[i+3][n] == 'S') ++result;
-                if (i >= AMIN && d[i-1][n] == 'M' && d[i-2][n] == 'A' && d[i-3][n] == 'S') ++result;
+                if (i <= MAX && puzzle[i+1][n] == 'M' && puzzle[i+2][n] == 'A' && puzzle[i+3][n] == 'S') result++;
+                if (i >= MIN && puzzle[i-1][n] == 'M' && puzzle[i-2][n] == 'A' && puzzle[i-3][n] == 'S') result++;
 
                 //diagonal
-                if (i <= AMAX && n <= AMAX && d[i+1][n+1] == 'M' && d[i+2][n+2] == 'A' && d[i+3][n+3] == 'S') ++result;
-                if (i <= AMAX && n >= AMIN && d[i+1][n-1] == 'M' && d[i+2][n-2] == 'A' && d[i+3][n-3] == 'S') ++result;
-                if (i >= AMIN && n <= AMAX && d[i-1][n+1] == 'M' && d[i-2][n+2] == 'A' && d[i-3][n+3] == 'S') ++result;
-                if (i >= AMIN && n >= AMIN && d[i-1][n-1] == 'M' && d[i-2][n-2] == 'A' && d[i-3][n-3] == 'S') ++result;
+                if (i <= MAX && n <= MAX && puzzle[i+1][n+1] == 'M' && puzzle[i+2][n+2] == 'A' && puzzle[i+3][n+3] == 'S') result++;
+                if (i <= MAX && n >= MIN && puzzle[i+1][n-1] == 'M' && puzzle[i+2][n-2] == 'A' && puzzle[i+3][n-3] == 'S') result++;
+                if (i >= MIN && n <= MAX && puzzle[i-1][n+1] == 'M' && puzzle[i-2][n+2] == 'A' && puzzle[i-3][n+3] == 'S') result++;
+                if (i >= MIN && n >= MIN && puzzle[i-1][n-1] == 'M' && puzzle[i-2][n-2] == 'A' && puzzle[i-3][n-3] == 'S') result++;
 
-            } else if (d[i][n] == 'A') {  //part2
+            } else if (puzzle[i][n] == 'A') {  //part2
                 if (i > 0 && i < 139 && n > 0 && n < 139) {
-                    size_t isx = 0;
+                    uint8_t is_x = 0;
                     // M \ S || S \ M
-                    if ((d[i-1][n-1] == 'M' && d[i+1][n+1] == 'S') || (d[i-1][n-1] == 'S' && d[i+1][n+1] == 'M')) isx++;
+                    if ((puzzle[i-1][n-1] == 'M' && puzzle[i+1][n+1] == 'S') || (puzzle[i-1][n-1] == 'S' && puzzle[i+1][n+1] == 'M')) is_x++;
                     // M / S || S / M
-                    if ((d[i-1][n+1] == 'M' && d[i+1][n-1] == 'S') || (d[i-1][n+1] == 'S' && d[i+1][n-1] == 'M')) isx++;
+                    if ((puzzle[i-1][n+1] == 'M' && puzzle[i+1][n-1] == 'S') || (puzzle[i-1][n+1] == 'S' && puzzle[i+1][n-1] == 'M')) is_x++;
 
-                    if (isx == 2) ++result2;
+                    if (is_x == 2) result2++;
                 }
             }
-            
         }
     }
 
-    printf("Part 1: %zu\nPart 2: %zu\n", result, result2);
+    printf("Part 1: %zu\n", result);
+    printf("Part 2: %zu\n", result2);
 
     return 0;
 }

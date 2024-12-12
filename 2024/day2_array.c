@@ -14,7 +14,6 @@ bool check_safety(const int *d, const size_t arrsize) {
         {
             return false;
         }
-
     }
 
     return true;
@@ -33,11 +32,11 @@ int main() {
         while (token != NULL) {
             holder[counter] = atoi(token);
             token = strtok(NULL, " ");
-            ++counter;
+            counter++;
         }
 
         if (check_safety(holder, counter)) {
-            ++safe_count;
+            safe_count++;
         }
     }
 

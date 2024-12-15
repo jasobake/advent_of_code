@@ -30,6 +30,7 @@ void read_input(char dest[][130], int guard[2]) {
 
 int main() {
     char d[SIZE][SIZE] = {0};
+    bool r[SIZE][SIZE] = {false};
     int guard[2];
     Direction direction = UP;
     Direction new_direction = UP;
@@ -74,7 +75,7 @@ int main() {
 
 
         direction = new_direction;    
-        d[guard_x][guard_y] = 'V';
+        r[guard_x][guard_y] = true;
 
         counter++;
     } 
@@ -82,7 +83,7 @@ int main() {
     size_t result = 0;
     for (size_t row = 0; row < SIZE; ++row) {
         for (size_t col = 0; col < SIZE; ++col) {
-            if (d[row][col] == 'V') ++result;
+            if (r[row][col]) ++result;
         }
     }
 

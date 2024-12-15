@@ -40,7 +40,7 @@ int main() {
     size_t c = 0;
     bool checked[SIZE][SIZE] = { false };
 
-    for (size_t i = 0; i < SIZE; i++)
+    for (size_t i = 0; i < SIZE; i++) {
         for (size_t n = 0; n < SIZE; n++) {
             if (data[i][n] == '0') {
                 memset(checked, false, sizeof(checked));
@@ -48,6 +48,7 @@ int main() {
                 c += score;
             }
         }
+    }
     
     printf("%zu", c);
     return 0;

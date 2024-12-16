@@ -43,7 +43,6 @@ int main() {
         if (check(numbers, numbers[0], 0, target, count)) {
             result += target;
         }
-
     }
 
     fclose(f);
@@ -80,7 +79,7 @@ int parse_string(const char *input, size_t *first_num, size_t *numbers, size_t *
 }
 
 uint64_t combine_uint64(uint64_t a, uint64_t b) {
-    if (b == 0) return a * 10;  // Special case when b is 0
+    if (b == 0) return a * 10;
 
     uint64_t b_copy = b;
     uint64_t multiplier = 1;

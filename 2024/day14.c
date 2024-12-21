@@ -46,8 +46,8 @@ int main() {
         //part 2 - for each second, search the grid for 5x5 solid pattern
         size_t robots = 0;
         if (seconds > SECONDS && checkblock(floor, 5, 5)) {
-            for (size_t row = 0; row < GRID_HEIGHT; row++) {
-                for (size_t col = 0; col < GRID_WIDTH; col++) {
+            for (size_t row = 0; row < GRID_HEIGHT; ++row) {
+                for (size_t col = 0; col < GRID_WIDTH; ++col) {
                     robots = floor[col][row];
                     if (robots == 0) {
                         printf(".");
@@ -71,11 +71,11 @@ int main() {
 
 bool checkblock(int floor[][GRID_HEIGHT], int w, int h) {
     bool found = true;
-    for (size_t x = 0; x < GRID_WIDTH - w; x++) {
-        for (size_t y = 0; y < GRID_HEIGHT - h; y++) {
+    for (size_t x = 0; x < GRID_WIDTH - w; ++x) {
+        for (size_t y = 0; y < GRID_HEIGHT - h; ++y) {
             found = true;
             for (size_t rows = 0; rows < h; ++rows) {
-                for (size_t cols = 0; cols < w; cols++) {
+                for (size_t cols = 0; cols < w; ++cols) {
                     if (floor[x+rows][y+cols] == 0) {
                         found = false;
                         break;

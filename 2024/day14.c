@@ -11,62 +11,60 @@
 bool checkblock(int floor[][GRID_HEIGHT], int w, int h);
 
 int main() {
-    int x = 0, y = 0, vx = 0, vy = 0, r1 = 0, r2 = 0, q1 = 0, q2 = 0, q3 = 0, q4 = 0, h_s = 0, w_s = 0;
+    int x = 0, y = 0, velocity_x = 0, velocity_y = 0, new_x = 0, new_y = 0;
+    size_t quadrant_1 = 0, quadrant_2 = 0, quadrant_3 = 0, quadrant_5 = 0, quadrant_height = 0, quadrant_width = 0;
 
-    size_t sec = 0;
+    size_t part_1 = 0;
+    size_t seconds = SECONDS;
 
     while(true) {
         int floor[GRID_WIDTH][GRID_HEIGHT] = { 0 };
-        q1 = 0; q2 = 0; q3 = 0; q4 = 0;
+        quadrant_1 = 0; quadrant_2 = 0; quadrant_3 = 0; quadrant_5 = 0;
         for (size_t r = 0; r < ROWS; ++r) {
             x = data[r][0];
             y = data[r][1];
-            vx = data[r][2];
-            vy = data[r][3];
-            r1 = (x + (vx * (int)sec)) % GRID_WIDTH;
-            r2 = (y + (vy * (int)sec)) % GRID_HEIGHT;
+            velocity_x = data[r][2];
+            velocity_y = data[r][3];
+            new_x = (x + (velocity_x * (int)seconds)) % GRID_WIDTH;
+            new_y = (y + (velocity_y * (int)seconds)) % GRID_HEIGHT;
 
-            if (r1 < 0) r1 = GRID_WIDTH + r1;
-            if (r2 < 0) r2 = GRID_HEIGHT + r2;
+            if (new_x < 0) new_x = GRID_WIDTH + new_x;
+            if (new_y < 0) new_y = GRID_HEIGHT + new_y;
 
-            floor[r1][r2]++;
+            floor[new_x][new_y]++;
 
-            h_s = ((GRID_HEIGHT - 1) / 2);
-            w_s = ((GRID_WIDTH - 1) / 2);
+            quadrant_height = ((GRID_HEIGHT - 1) / 2);
+            quadrant_width = ((GRID_WIDTH - 1) / 2);
 
-            if (r1 < w_s && r2 < h_s) q1++;
-            if (r1 < w_s && r2 > h_s) q2++;
-            if (r1 > w_s && r2 < h_s) q3++;
-            if (r1 > w_s && r2 > h_s) q4++;
+            if (new_x < quadrant_width && new_y < quadrant_height) quadrant_1++;
+            if (new_x < quadrant_width && new_y > quadrant_height) quadrant_2++;
+            if (new_x > quadrant_width && new_y < quadrant_height) quadrant_3++;
+            if (new_x > quadrant_width && new_y > quadrant_height) quadrant_5++;
         }
 
-        if (sec == SECONDS) {
-            printf("Part 1: %d", (q1 * q2 * q3 * q4));
-            getchar();         
-        }
-
+        if (seconds == SECONDS) part_1 = quadrant_1 * quadrant_2 * quadrant_3 * quadrant_5;      
+        
         //part 2 - for each second, search the grid for 5x5 solid pattern
-        if (checkblock(floor, 5, 5)) {
-            size_t c = 0;
+        size_t robots = 0;
+        if (seconds > SECONDS && checkblock(floor, 5, 5)) {
             for (size_t row = 0; row < GRID_HEIGHT; row++) {
                 for (size_t col = 0; col < GRID_WIDTH; col++) {
-                    int v = floor[col][row];
-                    if (v == 0) {
+                    robots = floor[col][row];
+                    if (robots == 0) {
                         printf(".");
                     } else {
-                        printf("%d", v);
-                        c++;
+                        printf("%zu", robots);
                     }
                 }
                 puts("");
             }
-        
-            printf("Seconds: %d\n", sec);
-            getchar();
+
+            printf("Part 1: %zu\nPart 2: %zu\n", part_1, seconds);
+            return 0;
         }
 
-        sec++; 
-        if (sec % 1000 == 0) printf("Seconds: %d\n", sec);
+        seconds++; 
+        if (seconds % 1000 == 0) printf("Seconds: %zu\n", seconds);
     }
 
     return 0;

@@ -12,14 +12,14 @@ bool checkblock(int floor[][GRID_HEIGHT], int w, int h);
 
 int main() {
     int x = 0, y = 0, velocity_x = 0, velocity_y = 0, new_x = 0, new_y = 0;
-    size_t quadrant_1 = 0, quadrant_2 = 0, quadrant_3 = 0, quadrant_5 = 0, quadrant_height = 0, quadrant_width = 0;
+    size_t quadrant_1 = 0, quadrant_2 = 0, quadrant_3 = 0, quadrant_4 = 0, quadrant_height = 0, quadrant_width = 0;
 
     size_t part_1 = 0;
     size_t seconds = SECONDS;
     int floor[GRID_WIDTH][GRID_HEIGHT] = { 0 };
 
     while(true) {
-        quadrant_1 = 0; quadrant_2 = 0; quadrant_3 = 0; quadrant_5 = 0;
+        quadrant_1 = 0; quadrant_2 = 0; quadrant_3 = 0; quadrant_4 = 0;
         for (size_t r = 0; r < ROWS; ++r) {
             x = data[r][0];
             y = data[r][1];
@@ -39,10 +39,10 @@ int main() {
             if (new_x < quadrant_width && new_y < quadrant_height) quadrant_1++;
             if (new_x < quadrant_width && new_y > quadrant_height) quadrant_2++;
             if (new_x > quadrant_width && new_y < quadrant_height) quadrant_3++;
-            if (new_x > quadrant_width && new_y > quadrant_height) quadrant_5++;
+            if (new_x > quadrant_width && new_y > quadrant_height) quadrant_4++;
         }
 
-        if (seconds == SECONDS) part_1 = quadrant_1 * quadrant_2 * quadrant_3 * quadrant_5;      
+        if (seconds == SECONDS) part_1 = quadrant_1 * quadrant_2 * quadrant_3 * quadrant_4;      
         
         //part 2 - for each second, search the grid for 5x5 solid pattern
         size_t robots = 0;

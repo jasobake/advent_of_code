@@ -7,24 +7,7 @@
 #define SECONDS 100
 #define ROWS 500
 
-bool checkblock(int floor[][GRID_HEIGHT], int w, int h) {
-    bool found = true;
-    for (size_t x = 0; x < GRID_WIDTH - w; x++) {
-        for (size_t y = 0; y < GRID_HEIGHT - h; y++) {
-            found = true;
-            for (size_t rows = 0; rows < h; ++rows) {
-                for (size_t cols = 0; cols < w; cols++) {
-                    if (floor[x+rows][y+cols] == 0) {
-                        found = false;
-                        break;
-                    }
-                }
-            }
-            if (found) return true;
-        }
-    }
-    return false; 
-}
+bool checkblock(int floor[][GRID_HEIGHT], int w, int h);
 
 int main() {
     int x = 0, y = 0, velocity_x = 0, velocity_y = 0, new_x = 0, new_y = 0;
@@ -86,3 +69,21 @@ int main() {
     return 0;
 }
 
+bool checkblock(int floor[][GRID_HEIGHT], int w, int h) {
+    bool found = true;
+    for (size_t x = 0; x < GRID_WIDTH - w; x++) {
+        for (size_t y = 0; y < GRID_HEIGHT - h; y++) {
+            found = true;
+            for (size_t rows = 0; rows < h; ++rows) {
+                for (size_t cols = 0; cols < w; cols++) {
+                    if (floor[x+rows][y+cols] == 0) {
+                        found = false;
+                        break;
+                    }
+                }
+            }
+            if (found) return true;
+        }
+    }
+    return false; 
+}

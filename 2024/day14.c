@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 #include "data/day13.h"
 
 #define GRID_WIDTH 101
@@ -15,9 +16,9 @@ int main() {
 
     size_t part_1 = 0;
     size_t seconds = SECONDS;
+    int floor[GRID_WIDTH][GRID_HEIGHT] = { 0 };
 
     while(true) {
-        int floor[GRID_WIDTH][GRID_HEIGHT] = { 0 };
         quadrant_1 = 0; quadrant_2 = 0; quadrant_3 = 0; quadrant_5 = 0;
         for (size_t r = 0; r < ROWS; ++r) {
             x = data[r][0];
@@ -64,6 +65,7 @@ int main() {
 
         seconds++; 
         if (seconds % 1000 == 0) printf("Seconds: %zu\n", seconds);
+        memset(floor, 0, sizeof(floor));
     }
 
     return 0;

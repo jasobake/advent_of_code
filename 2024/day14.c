@@ -18,6 +18,9 @@ int main() {
     size_t seconds = SECONDS;
     int floor[GRID_WIDTH][GRID_HEIGHT] = { 0 };
 
+    quadrant_height = ((GRID_HEIGHT - 1) / 2);
+    quadrant_width = ((GRID_WIDTH - 1) / 2);
+
     while(true) {
         quadrant_1 = 0; quadrant_2 = 0; quadrant_3 = 0; quadrant_4 = 0;
         for (size_t r = 0; r < ROWS; ++r) {
@@ -32,9 +35,6 @@ int main() {
             if (new_y < 0) new_y = GRID_HEIGHT + new_y;
 
             floor[new_x][new_y]++;
-
-            quadrant_height = ((GRID_HEIGHT - 1) / 2);
-            quadrant_width = ((GRID_WIDTH - 1) / 2);
 
             if (new_x < quadrant_width && new_y < quadrant_height) quadrant_1++;
             if (new_x < quadrant_width && new_y > quadrant_height) quadrant_2++;
